@@ -1,4 +1,7 @@
 const User = require('../models/user');
+const bcrypt = require('bcrypt')
+// A higher saltRounds value results in a more secure hash but requires more computational resources and time to generate
+const saltRounds = 10; 
 
 
 // Sign Up Action 
@@ -17,11 +20,13 @@ module.exports.signUp=async(req,res)=>{
         if(Existinguser){
             return res.status(400).json({ message: 'Email is already in use' });
         }
+        // 4: encrypt the password
+        const hashpassword = await bcrypt.hashSync(password,saltRounds);
         // 4:create user
         const user = await User.create({
             name:name,
             email:email,
-            password:password
+            password:hashpassword
         })
         // 5: return success message
         return res.status(200).json({
@@ -57,8 +62,9 @@ try {
         })
     }
     //4: check weather password is correct or not
+    const isPasswordMatch = await bcrypt.compareSync(password,user.password); // 1st para is the entered password and 2nd is the password in db
     //4.1: if not match -> name/email is incorrect
-    if(password != user.password){
+    if(isPasswordMatch){
         return res.status(400).json({
             message:'email or Password is incorrect',
             data:{}
