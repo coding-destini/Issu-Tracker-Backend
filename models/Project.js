@@ -18,6 +18,12 @@ const projectSchema = new mongoose.Schema({
         enum:['web','android','ios'], // enum means it should have only one options from these three
         required:true
     },
+      issues: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Issue'
+        }
+      ]
 
 },{timestamps:true})
 const Project  = mongoose.model('Project',projectSchema);

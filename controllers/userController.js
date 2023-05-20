@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt')
+var jwt = require('jsonwebtoken')
 // A higher saltRounds value results in a more secure hash but requires more computational resources and time to generate
 const saltRounds = 10; 
 
@@ -70,18 +71,19 @@ try {
             data:{}
         })
     }
+    const token = jwt.sign({email:user.email},"secret",{expiresIn:"1h"});
     
     //4.2: if match -> return success message 
     return res.status(200).json({
         message:'User Sign In Successfully',
-        data:{user}
+        data:token
     })
 } catch (error) {
     return res.status(500).json({
-        message:'Server Error , while creating the User',
+        message:'Server Error , while sign in the User',
         data:{
-            err
-        }
+            error        }
     }) 
 }
 }
+
