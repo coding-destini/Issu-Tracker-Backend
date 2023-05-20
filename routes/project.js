@@ -9,6 +9,11 @@ router.delete('/delete/:projectId',passport.authenticate('jwt',{session:false}),
 router.put('/update/:projectId',passport.authenticate('jwt',{session:false}),projectController.updateproject)
 router.get('/Allprojects',passport.authenticate('jwt',{session:false}),projectController.getProjects);
 router.get('/projectdetails/:projectId',passport.authenticate('jwt',{session:false}),projectController.getProjectDetails)
+
+
 router.post('/issue/:projectId',passport.authenticate('jwt',{session:false}),projectController.createIssue)
+//getting issue of a particular project
 router.get('/getIssues/:projectId',passport.authenticate('jwt',{session:false}),projectController.getIssues)
+//get all issues
+router.get('/getallissues',passport.authenticate('jwt',{session:false}),projectController.getAllIssues)
 module.exports=router;

@@ -42,7 +42,8 @@ module.exports.createProject = async (req, res) => {
 // creating issue
 module.exports.createIssue = async (req, res) => {
     const {projectId} = req.params;
-  const { title, description, labels, author } = req.body;
+  const { title, description, labels } = req.body;
+  const author = req.user._id;
   //   const author = req.user._id; // Assuming the author is determined based on the logged-in user
 
   try {
@@ -75,13 +76,16 @@ module.exports.createIssue = async (req, res) => {
   }
 };
 
-//get all issues
+//get all issues of a particular  project
 module.exports.getIssues = async (req, res) => {
   try {
     //1:get project by params
     const { projectId } = req.params;
     //2:check if project exist
-    const project = await Project.findById(projectId);
+    const project = await Project.findById(projectId).populate({
+      path: "issues",
+      select: "title description labels",
+    });
     if (!project) {
       return res.status(404).json({ error: "Project not found" });
     }
@@ -95,6 +99,32 @@ module.exports.getIssues = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to get the issue" });
+  }
+}
+
+//get all issues
+module.exports.getAllIssues = async(req,res)=>{
+  try {
+    const issues = await Issue.find({}).populate({
+      path: "project",
+      select: "name",
+      
+    }).populate({
+      path: "author",
+      select: "name email",
+    })
+    if(!issues){
+      return res.status(404).json({error:"No issues found"})
+    }
+    return res.status(200).json({
+      message:"Issues found",
+      issues
+    })
+  } catch (error) {
+    console.log("error",error)
+    return res.status(500,{
+      error:"Failed to get the issue"
+    })
   }
 }
 
