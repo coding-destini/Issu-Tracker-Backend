@@ -11,7 +11,7 @@ router.get('/Allprojects',passport.authenticate('jwt',{session:false}),projectCo
 router.get('/projectdetails/:projectId',passport.authenticate('jwt',{session:false}),projectController.getProjectDetails)
 
 
-router.post('/issue/:projectId',passport.authenticate('jwt',{session:false}),projectController.createIssue)
+router.post('/create-issue/:projectId',passport.authenticate('jwt',{session:false}),projectController.createIssue)
 //getting issue of a particular project
 router.get('/getIssues/:projectId',passport.authenticate('jwt',{session:false}),projectController.getIssues)
 //get all issues

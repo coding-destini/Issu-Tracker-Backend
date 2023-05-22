@@ -24,8 +24,9 @@ module.exports.createProject = async (req, res) => {
     //push project in user ProjctType field so that in future if i want that how many
     //or which project is created by this particular user , so i can get that by pushing project id in this field
     const user = await User.findById(author);
-    user.projects.push(project._id);
-    console.log(user);
+    user.projects.push(project);
+    //save user
+    await user.save();
     //5:return success
     return res.status(201).json({
       message: "project created",
