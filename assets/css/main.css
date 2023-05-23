@@ -1,0 +1,52 @@
+#main-container{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 1%;
+    background-color: #fff;
+}
+
+.left-bar{
+    border: 1px solid black;
+    border-radius: 20px;
+    margin: 1% 0%;
+    padding: 1%;
+}
+.right-bar{
+    border: 1px solid black;
+    border-radius: 20px;
+    margin: 1% 0%;
+    padding: 1%;
+}
+.user .user-img{
+    display: flex;
+    justify-content: center;
+    border: 2px solid black;
+    padding: 1%;
+    border-radius: 25px;
+    margin-bottom: 5%;
+}
+.user-img img{
+    width: 70%;
+border-radius: 50px;
+}
+.user-name{
+    display: flex;
+    justify-content: center;
+    border: 2px solid black;
+    padding: 1%;
+    border-radius: 25px;
+}
+
+.project-categery .pr{
+    list-style-type: none;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 10px;
+    margin:10px;
+    margin-bottom: 15px;
+    transition: 0.5s ease-in-out;
+}

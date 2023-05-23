@@ -188,16 +188,25 @@ module.exports.updateproject = async (req, res) => {
 //Show all projects
 module.exports.getProjects = async (req, res) => {
   try {
-    const allProjects = await Project.find();
+    const allProjects = await Project.find().populate({
+      path:'author',
+      select:'name'
+    });
     if (!allProjects) {
       return res.status(400).json({
         error: "No projects found",
       });
     }
-    return res.status(200).json({
-      message: "all projects",
-      data: { allProjects },
-    });
+    // return res.status(200).json({
+    //   message: "all projects",
+    //   data: { allProjects },
+    // });
+    return res.render('home',{
+      title : "Home",
+      header : "CodeBook",
+      projects:allProjects,
+  })
+
   } catch (error) {
     return res.status(500).json({
       message: "Error in showing all projects",
