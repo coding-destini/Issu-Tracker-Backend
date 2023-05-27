@@ -8,3 +8,4 @@ router.post('/sign-in',userController.signIn);
 //get user details
 router.get('/getUserDetails',passport.authenticate('jwt',{session:false}),userController.getUserDetails)
 module.exports=router;
+

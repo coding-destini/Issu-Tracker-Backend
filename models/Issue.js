@@ -14,11 +14,16 @@ const issueSchema = new mongoose.Schema({
           type: String
         }
       ],
+      // author:{
+      //   type: mongoose.Schema.Types.ObjectId,
+      //   ref:'User', // refering to User model
+      //   required:true
+      // },
       author:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'User', // refering to User model
-        required:true
-      },
+        // type: mongoose.Schema.Types.ObjectId,
+        type:String,
+        ref:'User' // refering to User model
+    },
       project: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Project',

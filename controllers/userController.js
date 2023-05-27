@@ -53,6 +53,7 @@ module.exports.signIn = async(req,res)=>{
 try {
     //1: fetch email and password from req.body
     const { email, password } = req.body;
+    console.log(req.body)
     //2: fetch user data from db using email
     const user = await User.findOne({email :email});
     //3: check weather user exist or not
@@ -71,14 +72,18 @@ try {
             data:{}
         })
     }
-    const token = jwt.sign({email:user.email},"secret",{expiresIn:"1h"});
-    
+    const token = await jwt.sign({email:user.email},"secret",{expiresIn:"1h"});
+   
+    console.log("token",token)
     //4.2: if match -> return success message 
     return res.status(200).json({
         message:'User Sign In Successfully',
-        data:token
+        data:"Bearer"+token
     })
+    // return res.redirect('/')
+    //return to homepage
 } catch (error) {
+    console.log(error)
     return res.status(500).json({
         message:'Server Error , while sign in the User',
         data:{
@@ -113,3 +118,7 @@ module.exports.getUserDetails = async(req,res)=>{
     }
 }
 
+module.exports.createSession=(req,res)=>{
+// req.flash('success','logged in successfully')
+res.redirect('/')
+}

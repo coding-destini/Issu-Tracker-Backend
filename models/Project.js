@@ -10,12 +10,13 @@ const projectSchema = new mongoose.Schema({
         required: true,
     },
     author:{
-        type: mongoose.Schema.Types.ObjectId,
+        // type: mongoose.Schema.Types.ObjectId,
+        type:String,
         ref:'User' // refering to User model
     },
     projectType:{
         type:String,
-        enum:['web','android','ios'], // enum means it should have only one options from these three
+        enum:['web','android','ios','desktop'], // enum means it should have only one options from these three
         required:true
     },
       issues: [

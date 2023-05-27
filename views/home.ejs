@@ -2,38 +2,96 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-3 left-bar shadow">
-      <div class="user">
-        <div class="user-img shadow">
-          <img
-            src="https://media.istockphoto.com/id/1296058958/vector/happy-young-woman-watching-into-rounded-frame-isolated-on-white-3d-vector-illustration.jpg?s=612x612&w=0&k=20&c=x9lmmoKVqxRro-G3S48IWIKQiykb2Yv1CkuiizDJ6gw="
-            alt=""
-          />
-        </div>
-        <div class="user-name">Elizabeth</div>
-      </div>
-      <div class="project-categery">
-        <div class="anodroid-projects pr">Android</div>
-        <div class="ios-projects pr">IOS</div>
-        <div class="web-projects pr">Websites</div>
-      </div>
-    </div>
-    <div class="col-9 right-bar shadow">
-      <div class="row">
+   <!-- check if user is authorized or not  -->
+  
 
+  <div class="col-3 left-bar shadow">
+    <div class="user">
+      <div class="user-img shadow">
+        <img
+          src="https://media.istockphoto.com/id/1296058958/vector/happy-young-woman-watching-into-rounded-frame-isolated-on-white-3d-vector-illustration.jpg?s=612x612&w=0&k=20&c=x9lmmoKVqxRro-G3S48IWIKQiykb2Yv1CkuiizDJ6gw="
+          alt=""
+        />
+      </div>
+      <div class="user-name">Wednesday adams</div>
+    </div>
+    <div class="project-categery">
+      <div class="anodroid-projects pr">Android</a></div>
+      <div class="ios-projects pr">IOS</div>
+      <div class="web-projects pr">Websites</div>
+    </div>
+  </div>
+    <div class="col-9 right-bar shadow">
+
+      <div class="row">
 <% for( let project of projects ) { %>
         <div class="col-sm-4">
         
             <div class="card">
-                <h3 class="card__title"><%= project.name%>
-                </h3>
-                
+              <div class="d-flex ">
+                <h3 class="card__title w-100" style="text-decoration: none;"><%= project.name%></h3>
+             <div  class="  d-flex flex-row-reverse fs-5">
+                <div class="update">
+                  <a  class="border-0" data-bs-toggle="modal" data-bs-target="#updateModal-<%= project.id %>" ><i class="fa-regular fa-pen-to-square update"></i></a>
+                </div>
+             <form action="/delete/<%= project.id %>" method="post">
+              <button  type="submit" class="border-0"><i class="fa-regular fa-trash-can delete"></i></button>
+             </form> 
+             </div>
+              </div>
+             
+               
+ <!-- Modal for update Project-->
+ <div class="modal fade" id="updateModal-<%= project.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Project</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/update/<%=project.id%>" method="post">
+          <div class="mb-3">
+            <label for="exampleInputProjectName" class="form-label">Project Name</label>
+            <input type="text" class="form-control" id="exampleInputProjectName" aria-describedby="ProjectHelp" name="name" value="<%= project.name%>">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPrjectDes" class="form-label">Project description</label>
+              <input type="text" class="form-control" id="exampleInputPrjectDes" name="description" value="<%= project.description%>">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputAuthor" class="form-label">Author Name</label>
+                <input type="text" class="form-control" id="exampleInputAuthor" name="author" value="<%= project.author%>" disabled>
+                </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Project Type</label>
+                <select class="form-select" name="projectType">
+                  <option value="web" <%= project.projectType === 'web' ? 'selected' : '' %>>Web</option>
+                  <option value="android" <%= project.projectType === 'android' ? 'selected' : '' %>>Android</option>
+                  <option value="ios" <%= project.projectType === 'ios' ? 'selected' : '' %>>IOS</option>
+                  <option value="desktop" <%= project.projectType === 'desktop' ? 'selected' : '' %>>Desktop</option>
+                  <option value="other" <%= project.projectType === 'other' ? 'selected' : '' %>>Other</option>
+                </select>
+            
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Update Project</button>
+              </div>
+        
+              </div>
+</form>
+    </div>
+    </div>
+  </div>    
+              
                 <p class="card__content">
                     Description: <%= project.description%>
-                    <br>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                </p>
                 <div class="card__date">
-                    <%= project.author.name%>
+                    <i>Made by : <%= project.author%></i>
+                    <br>
+                    <b>Project Type : <%= project.projectType%></b>
                 </div>
                 <div class="card__arrow">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
@@ -42,10 +100,11 @@
                 </div>
             </div>
         </div>
-
 <% } %>
-
     </div>
     </div>
   </div>
 </div>
+
+
+ 

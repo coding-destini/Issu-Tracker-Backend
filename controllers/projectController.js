@@ -1,13 +1,12 @@
 const Project = require("../models/Project");
-const User = require("../models/user");
 const Issue = require("../models/Issue");
 
 //creating Project
 module.exports.createProject = async (req, res) => {
   try {
     //1: get the data
-    const { name, description, projectType } = req.body;
-    const author = req.user._id; // getting this from route from passport jwt
+    const { name, description, projectType ,author} = req.body;
+    // const author = req.user._id; // getting this from route from passport jwt
     //2:create project
     const project = await Project.create({
       name: name,
@@ -23,16 +22,19 @@ module.exports.createProject = async (req, res) => {
     }
     //push project in user ProjctType field so that in future if i want that how many
     //or which project is created by this particular user , so i can get that by pushing project id in this field
-    const user = await User.findById(author);
-    user.projects.push(project);
+    // const user = await User.findById(author);
+    // user.projects.push(project);
     //save user
-    await user.save();
-    //5:return success
-    return res.status(201).json({
-      message: "project created",
-      project: project,
-    });
+    // await user.save();
+    // return success
+    // return res.status(201).json({
+    //   message: "project created",
+    //   project: project,
+    // });
+    return res.redirect('back');
+   
   } catch (error) {
+    console.log(error)
     return res.status(500).json({
       message: "Error in creating Project",
       error: error,
@@ -117,10 +119,11 @@ module.exports.getAllIssues = async(req,res)=>{
     if(!issues){
       return res.status(404).json({error:"No issues found"})
     }
-    return res.status(200).json({
-      message:"Issues found",
-      issues
-    })
+    return res.render('Issues',{
+      header : "All Issues",
+      create:"Contribute on Github 😊",
+      issues:issues,
+  })
   } catch (error) {
     console.log("error",error)
     return res.status(500,{
@@ -142,11 +145,13 @@ module.exports.deleteproject = async (req, res) => {
       });
     }
     //return project deleted successfuly
-    return res.status(200).json({
-      message: "project deleted",
-      data: { deleteProject },
-    });
+    // return res.status(200).json({
+    //   message: "project deleted",
+    //   data: { deleteProject },
+    // });
+    return res.redirect('/')
   } catch (error) {
+    console.log(error)
     return res.status(500).json({
       message: "Error in deleting Project",
       error: error,
@@ -173,10 +178,12 @@ module.exports.updateproject = async (req, res) => {
         error: "project not found",
       });
     }
-    return res.status(200).json({
-      message: "project updated",
-      data: { updateProject },
-    });
+    // return res.status(200).json({
+    //   message: "project updated",
+    //   data: { updateProject },
+    // });
+
+    return res.redirect('/')
   } catch (error) {
     return res.status(500).json({
       message: "Error in Updating Project",
@@ -188,10 +195,7 @@ module.exports.updateproject = async (req, res) => {
 //Show all projects
 module.exports.getProjects = async (req, res) => {
   try {
-    const allProjects = await Project.find().populate({
-      path:'author',
-      select:'name'
-    });
+    const allProjects = await Project.find();
     if (!allProjects) {
       return res.status(400).json({
         error: "No projects found",
@@ -202,8 +206,8 @@ module.exports.getProjects = async (req, res) => {
     //   data: { allProjects },
     // });
     return res.render('home',{
-      title : "Home",
-      header : "CodeBook",
+      header : "All Projects",
+      create:"Create Projects",
       projects:allProjects,
   })
 
@@ -214,20 +218,29 @@ module.exports.getProjects = async (req, res) => {
     });
   }
 };
+
 //ProjectDetails
 module.exports.getProjectDetails = async (req, res) => {
   try {
     //get project details from the reference of project
     const { projectId } = req.params;
-    const projectDetails = await Project.findById(projectId);
+    const projectDetails = await Project.findById(projectId).populate({
+      path: "issues",
+      select: "title",
+    });
     if (!projectDetails) {
       return res.status(400).json({
         error: "project not found",
       });
     }
-    return res.status(200).json({
-      message: "project details",
-      data: { projectDetails },
-    });
+    // return res.status(200).json({
+    //   message: "project details",
+    //   data: { projectDetails },
+    // });
+    return res.render('project_details',{
+      header : "Projects Details",
+      create:"Create Issue",
+      projectdetails:projectDetails,
+  })
   } catch (error) {}
 };

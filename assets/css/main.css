@@ -1,8 +1,7 @@
 #main-container{
     width: 80%;
     margin: 0 auto;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin-top: 2%;
     border: 1px solid black;
     border-radius: 20px;
     padding: 1%;
@@ -50,3 +49,54 @@ border-radius: 50px;
     margin-bottom: 15px;
     transition: 0.5s ease-in-out;
 }
+
+.update{
+    color: rgb(0, 0, 0);
+    transition: 0.5s ease-in-out;
+    }
+.update:hover{
+color: rgb(5, 211, 5);
+transition: 0.5s ease-in-out;
+}
+.delete{
+    color: rgb(0, 0, 0);
+    transition: 0.5s ease-in-out;
+}
+.delete:hover{
+    color: rgb(211, 5, 5);
+    transition: 0.5s ease-in-out;
+}
+
+.issue-btn {
+    cursor: pointer;
+    font-weight: 700;
+    font-family: Helvetica,"sans-serif";
+    transition: all .2s;
+    padding: 10px 20px;
+    border-radius: 100px;
+    background: #cfef00;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+  }
+  
+  .issue-btn:hover {
+    background: #c4e201;
+  }
+  
+  .issue-btn > svg {
+    width: 34px;
+    margin-left: 10px;
+    transition: transform .3s ease-in-out;
+  }
+  
+  .issue-btn:hover svg {
+    transform: translateX(5px);
+  }
+  
+  .issue-btn:active {
+    transform: scale(0.95);
+  }
+  
+  
