@@ -13,6 +13,7 @@
   box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 3%);
   position: relative;
   margin: 1rem;
+  
 }
 
 .card > * + * {
@@ -29,6 +30,13 @@
   font-size: 1.3rem;
   font-weight: bold;
 }
+.card .card__title a{
+ text-decoration: none;
+ color: #111;
+}
+.card .card__title a:hover{
+  color: var(--primary-color);
+ }
 
 .card .card__date {
   color: #6e6b80;

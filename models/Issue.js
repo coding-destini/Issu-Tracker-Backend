@@ -20,9 +20,8 @@ const issueSchema = new mongoose.Schema({
       //   required:true
       // },
       author:{
-        // type: mongoose.Schema.Types.ObjectId,
-        type:String,
-        ref:'User' // refering to User model
+       type:String,
+        
     },
       project: {
         type: mongoose.Schema.Types.ObjectId,

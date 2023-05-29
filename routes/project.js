@@ -9,8 +9,10 @@ router.post('/delete/:projectId',projectController.deleteproject);
 router.post('/update/:projectId',projectController.updateproject)
 //All Projects as HomePage
 router.get('/',projectController.getProjects);
-router.get('/projectdetails/:projectId',projectController.getProjectDetails)
 
+
+router.get('/projectdetails/:projectId',projectController.getProjectDetails);
+  
 
 router.post('/create-issue/:projectId',projectController.createIssue)
 //getting issue of a particular project

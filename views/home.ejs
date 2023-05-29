@@ -2,11 +2,10 @@
 
 <div class="container-fluid">
   <div class="row">
-   <!-- check if user is authorized or not  -->
   
 
-  <div class="col-3 left-bar shadow">
-    <div class="user">
+  <div class="col-3 left-bar shadow animate__headShake animate__animated">
+    <div class="user ">
       <div class="user-img shadow">
         <img
           src="https://media.istockphoto.com/id/1296058958/vector/happy-young-woman-watching-into-rounded-frame-isolated-on-white-3d-vector-illustration.jpg?s=612x612&w=0&k=20&c=x9lmmoKVqxRro-G3S48IWIKQiykb2Yv1CkuiizDJ6gw="
@@ -25,11 +24,11 @@
 
       <div class="row">
 <% for( let project of projects ) { %>
-        <div class="col-sm-4">
+        <div class="col-sm-4   animate__animated      animate__flipInX">
         
             <div class="card">
               <div class="d-flex ">
-                <h3 class="card__title w-100" style="text-decoration: none;"><%= project.name%></h3>
+                <h3 class="card__title w-100" ><a href="./projectdetails/<%= project.id %> " ><%= project.name%> </a></h3>
              <div  class="  d-flex flex-row-reverse fs-5">
                 <div class="update">
                   <a  class="border-0" data-bs-toggle="modal" data-bs-target="#updateModal-<%= project.id %>" ><i class="fa-regular fa-pen-to-square update"></i></a>
@@ -66,11 +65,11 @@
               <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Project Type</label>
                 <select class="form-select" name="projectType">
-                  <option value="web" <%= project.projectType === 'web' ? 'selected' : '' %>>Web</option>
-                  <option value="android" <%= project.projectType === 'android' ? 'selected' : '' %>>Android</option>
-                  <option value="ios" <%= project.projectType === 'ios' ? 'selected' : '' %>>IOS</option>
-                  <option value="desktop" <%= project.projectType === 'desktop' ? 'selected' : '' %>>Desktop</option>
-                  <option value="other" <%= project.projectType === 'other' ? 'selected' : '' %>>Other</option>
+                  <option value="web" name="web">Web</option>
+                  <option value="android" name="Android">Android</option>
+                  <option value="ios" name="IOS">IOS</option>
+                  <option value="desktop" name="Desktop">Desktop</option>
+                  <option value="other" name="Other">Other</option>
                 </select>
             
               </div>
@@ -94,9 +93,11 @@
                     <b>Project Type : <%= project.projectType%></b>
                 </div>
                 <div class="card__arrow">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
+                    <a href="./projectdetails/<%= project.id %>">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="15" width="15">
                         <path fill="#fff" d="M13.4697 17.9697C13.1768 18.2626 13.1768 18.7374 13.4697 19.0303C13.7626 19.3232 14.2374 19.3232 14.5303 19.0303L20.3232 13.2374C21.0066 12.554 21.0066 11.446 20.3232 10.7626L14.5303 4.96967C14.2374 4.67678 13.7626 4.67678 13.4697 4.96967C13.1768 5.26256 13.1768 5.73744 13.4697 6.03033L18.6893 11.25H4C3.58579 11.25 3.25 11.5858 3.25 12C3.25 12.4142 3.58579 12.75 4 12.75H18.6893L13.4697 17.9697Z"></path>
                     </svg>
+                    </a>
                 </div>
             </div>
         </div>

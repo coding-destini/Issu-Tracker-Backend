@@ -45,9 +45,11 @@ module.exports.createProject = async (req, res) => {
 // creating issue
 module.exports.createIssue = async (req, res) => {
     const {projectId} = req.params;
-  const { title, description, labels } = req.body;
-  const author = req.user._id;
+  const { title, description, labels ,author} = req.body;
+
   //   const author = req.user._id; // Assuming the author is determined based on the logged-in user
+
+  //passing project id to create issue
 
   try {
     // Check if the project exists
@@ -61,7 +63,7 @@ module.exports.createIssue = async (req, res) => {
       description,
       labels,
       author,
-      project: projectId,
+      project: projectId
     });
 
     // Push the issue to the project's issues array
@@ -69,10 +71,13 @@ module.exports.createIssue = async (req, res) => {
     // Save the project to the database
     const createdIssue = await project.save();
     // return the newly created issue
-    return res.status(201).json({
-      message: "Issue created",
-      issue: createdIssue,
-    });
+    // return res.status(201).json({
+    //   message: "Issue created",
+    //   issue: createdIssue,
+    // });
+    return res.redirect(`back`);
+  
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to create the issue" });
@@ -110,7 +115,7 @@ module.exports.getAllIssues = async(req,res)=>{
   try {
     const issues = await Issue.find({}).populate({
       path: "project",
-      select: "name",
+      select: "name discription author projectType",
       
     }).populate({
       path: "author",
@@ -119,10 +124,15 @@ module.exports.getAllIssues = async(req,res)=>{
     if(!issues){
       return res.status(404).json({error:"No issues found"})
     }
-    return res.render('Issues',{
+
+     // Extract all labels from the issues
+     const labels = [...new Set(issues.flatMap(issue => issue.labels))];
+
+    return res.render('All_Issues',{
       header : "All Issues",
       create:"Contribute on Github 😊",
       issues:issues,
+      labels:labels
   })
   } catch (error) {
     console.log("error",error)
@@ -219,28 +229,44 @@ module.exports.getProjects = async (req, res) => {
   }
 };
 
-//ProjectDetails
+//project details
 module.exports.getProjectDetails = async (req, res) => {
   try {
-    //get project details from the reference of project
     const { projectId } = req.params;
     const projectDetails = await Project.findById(projectId).populate({
       path: "issues",
-      select: "title",
+      select: "title labels author description",
     });
+    
     if (!projectDetails) {
       return res.status(400).json({
-        error: "project not found",
+        error: "Project not found",
       });
     }
-    // return res.status(200).json({
-    //   message: "project details",
-    //   data: { projectDetails },
-    // });
-    return res.render('project_details',{
-      header : "Projects Details",
-      create:"Create Issue",
-      projectdetails:projectDetails,
-  })
-  } catch (error) {}
+    
+      const labels = Array.from(
+      new Set(
+        projectDetails.issues.flatMap((issue) => issue.labels)
+      )
+    );
+
+
+// The flatMap() method is used to iterate over each issue in the projectDetails.issues array and extract the labels property from each issue. It returns a new array that contains all the labels from all the issues.
+
+// The Set object is used to create a new set, which only allows unique values. By passing the array of labels to the Set constructor, it removes any duplicate labels.
+
+// Finally, Array.from() is called to convert the set of unique labels back into an array. This ensures that the labels variable contains an array of unique label values extracted from the project issues.
+    
+    return res.render('project_details', {
+      header: "Projects Details",
+      create: "See all Issues",
+      projectdetails: projectDetails,
+      labels: labels,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch project details" });
+  }
 };
+
+

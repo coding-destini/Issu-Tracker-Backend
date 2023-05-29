@@ -1,0 +1,191 @@
+
+<style>
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.payment--options {
+  width: calc(100% - 40px);
+  display: grid;
+  grid-template-columns: 33% 34% 33%;
+  gap: 20px;
+  padding: 10px;
+}
+
+.payment--options button {
+  height: 55px;
+  background: #F2F2F2;
+  border-radius: 11px;
+  padding: 0;
+  border: 0;
+  outline: none;
+}
+
+.payment--options button svg {
+  height: 18px;
+}
+
+.payment--options button:last-child svg {
+  height: 22px;
+}
+
+.separator {
+  width: calc(100% - 20px);
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 10px;
+  color: #8B8E98;
+  margin: 0 10px;
+}
+
+.separator > p {
+  word-break: keep-all;
+  display: block;
+  text-align: center;
+  font-weight: 600;
+  font-size: 11px;
+  margin: auto;
+}
+
+.separator .line {
+  display: inline-block;
+  width: 100%;
+  height: 1px;
+  border: 0;
+  background-color: #e8e8e8;
+  margin: auto;
+}
+
+.credit-card-info--form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input_container {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 4fr 2fr;
+  gap: 15px;
+}
+
+.split input {
+  width: 100%;
+}
+
+.input_label {
+  font-size: 10px;
+  color: #8B8E98;
+  font-weight: 600;
+}
+
+.input_field {
+  width: auto;
+  height: 40px;
+  padding: 0 0 0 16px;
+  border-radius: 9px;
+  outline: none;
+  background-color: #F2F2F2;
+  border: 1px solid #e5e5e500;
+  transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+}
+
+.input_field:focus {
+  border: 1px solid transparent;
+  box-shadow: 0px 0px 0px 2px #242424;
+  background-color: transparent;
+}
+
+.purchase--btn {
+  height: 55px;
+  background: #F2F2F2;
+  border-radius: 11px;
+  border: 0;
+  outline: none;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  background: linear-gradient(180deg, #363636 0%, #1B1B1B 50%, #000000 100%);
+  box-shadow: 0px 0px 0px 0px #FFFFFF, 0px 0px 0px 0px #000000;
+  transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+}
+
+.purchase--btn:hover {
+  box-shadow: 0px 0px 0px 2px #FFFFFF, 0px 0px 0px 4px #0000003a;
+}
+
+/* Reset input number styles */
+.input_field::-webkit-outer-spin-button,
+.input_field::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input_field[type=number] {
+  -moz-appearance: textfield;
+}</style>
+
+<div class="container-fluid">
+    <div class="row"> 
+    
+  
+    <div class="col-3 left-bar shadow animate__fadeInUp animate__animated ">
+      <div class="user">
+        <div class="user-img shadow ">
+          <img
+            src="https://media.istockphoto.com/id/1296058958/vector/happy-young-woman-watching-into-rounded-frame-isolated-on-white-3d-vector-illustration.jpg?s=612x612&w=0&k=20&c=x9lmmoKVqxRro-G3S48IWIKQiykb2Yv1CkuiizDJ6gw="
+            alt=""
+          />
+        </div>
+        <div class="user-name">Issues of All Users</div>
+      </div>
+      <div class="project-categery">
+       <%for(labels of labels){%>
+        <div class="anodroid-projects pr"><%=labels%></a></div>
+        <%}%>
+      </div>
+    </div>
+    <div class="col-9 right-bar p-0 shadow">
+     <!-- //Showing All Issues  -->
+
+     <div class="row">
+      <div class="col-12 d-flex justify-content-between fs-5 px-5 py-2 sticky-top bg-white rounded">
+        <div class="user-img" ><b>User</b></div>
+        <div class="projectName"><b>Proejct</b></div>
+        <div class="issueName"><b> Issue title</b></div>
+        <div class="issueDesc"><b>Issue Description</b></div>
+      </div>
+
+    <%for(issue of issues){%>
+      <div class="col-12 animate__animated animate__lightSpeedInRight">
+        <div class="row m-2 issue border-black border rounded shadow "style="cursor: pointer;">
+          <div class="col-3 p-2" id="User" >
+            <div class="user-image "> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlPl8jPNtXLGbdrw3PHU-IglclBQSVCh4roSlxlk_Xx7pyJruULFZMS8HOcMP9hZdy3IY&usqp=CAU" alt="User Image" width="30%" style="border-radius: 50px;"></div>
+            <div class="userName"><b><%=issue.author%></b></div>
+          </div>
+          <div class="col-2 p-2 "id="Project"><%=issue.project.name%></div>
+          <div class="col-3 p-2" id="Issue" ><b><%=issue.title%></b></div>
+          <div class="col-4 p-2" id="IssueDesc" ><%=issue.description%></div>
+        </div>
+      </div>
+      <%}%>
+     </div>
+     
+    </div>
+  
+
+
+
+
+   

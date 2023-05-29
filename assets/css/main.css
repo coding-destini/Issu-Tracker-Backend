@@ -1,11 +1,11 @@
 #main-container{
     width: 80%;
+    height: 705px;
     margin: 0 auto;
     margin-top: 2%;
     border: 1px solid black;
     border-radius: 20px;
     padding: 1%;
-    background-color: #fff;
 }
 
 .left-bar{
@@ -13,13 +13,20 @@
     border-radius: 20px;
     margin: 1% 0%;
     padding: 1%;
+    height: 585px;
 }
 .right-bar{
     border: 1px solid black;
     border-radius: 20px;
     margin: 1% 0%;
     padding: 1%;
+    height: 585px;
+    overflow-y: scroll;
 }
+.right-bar::-webkit-scrollbar {
+    display: none;
+  }
+  
 .user .user-img{
     display: flex;
     justify-content: center;
@@ -100,3 +107,46 @@ transition: 0.5s ease-in-out;
   }
   
   
+
+  .table-container {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .table-container th,
+  .table-container td {
+    padding: 10px;
+  }
+
+  .table-container .user-img {
+    width: 180px;
+  }
+
+  .table-container .username {
+    width: 150px;
+  }
+
+  .table-container .issue-title {
+    width: 150px;
+  }
+
+  .table-container .issue-description {
+    width: 300px;
+  }
+
+  .specific-issue {
+    height: 340px;
+    overflow-y: scroll;
+    position: sticky;
+  }
+
+  .specific-issue::-webkit-scrollbar {
+    display: none;
+  }
+
+  .table-container thead {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1; /* Add this line */
+  }

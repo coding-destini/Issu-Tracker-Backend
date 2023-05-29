@@ -12,7 +12,7 @@ const projectSchema = new mongoose.Schema({
     author:{
         // type: mongoose.Schema.Types.ObjectId,
         type:String,
-        ref:'User' // refering to User model
+        required:true // refering to User model
     },
     projectType:{
         type:String,
