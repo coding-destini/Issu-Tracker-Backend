@@ -257,7 +257,7 @@ module.exports.getProjectDetails = async (req, res) => {
 
 // Finally, Array.from() is called to convert the set of unique labels back into an array. This ensures that the labels variable contains an array of unique label values extracted from the project issues.
     
-    return res.render('project_details', {
+    return res.render('Project_details', {
       header: "Projects Details",
       create: "See all Issues",
       projectdetails: projectDetails,
