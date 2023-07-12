@@ -128,7 +128,7 @@ module.exports.getAllIssues = async(req,res)=>{
      // Extract all labels from the issues
      const labels = [...new Set(issues.flatMap(issue => issue.labels))];
 
-    return res.render('All_Issues',{
+    return res.render('All_Issues.ejs',{
       header : "All Issues",
       create:"Contribute on Github 😊",
       issues:issues,
